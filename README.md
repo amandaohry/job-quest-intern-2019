@@ -15,7 +15,62 @@ Code must be written in Javascript language. The code will be tested with Node8,
 ```
 Answer:
 ```
--- insert your answer here
+//create variables
+const array = [1,2,3,4,5,6, 7];
+const direction = "left";
+const numElements = 2;
+
+console.log(array);
+console.log(direction);
+console.log(numElements);
+
+console.log(shift(array, direction, numElements));
+
+
+//function to shift elements
+function shift(array, direction, numElements) {
+  //create an array for results
+  var result = [];
+  console.log("direction: "+ direction);
+  console.log("numElements: "+ numElements);
+
+  // if direction is left
+  if (direction==="left"){
+    //initialise i
+    var i=0;
+
+    for (i=0; i<array.length; i++){ //for each element, shift to the left by numElements
+
+      if (i+numElements<array.length){ // if i is less than the array length
+
+        result.push(array[i+numElements]);
+
+      } else { //if i is more than the array length
+
+        result.push(array[i+numElements-array.length]);
+      }
+    }
+  } else { //direction is right
+
+    var i=0;
+
+    for (i=0; i<array.length; i++){ //for each element, shift to the right by numElements
+
+      if (i<numElements){ // if i is less than the number length of elements to be shifted
+
+        result.push(array[array.length-numElements+i]);
+
+      } else { //if i is more than or equal to numElements
+
+        result.push(array[i-numElements]);
+
+      }
+    }
+  }
+
+  return result;
+}
+
 ```
 2. Download [hero.json](https://github.com/takemetour/job-quest-intern-2019/blob/master/hero.json) and write a code to calculate these values from **hero.json**
 - 2.1 Average **networth** of all heroes
@@ -25,7 +80,109 @@ Answer:
 
 Answer:
 ```
--- insert your answer here
+const heroes = require('./hero.json');
+
+console.log(heroes);
+console.log("2.1 Average **networth** of all heroes is " + q2part1(heroes));
+console.log("2.2 Average **level** for hero that has 'intelligent' as **primary_attribute** is " + q2part2(heroes));
+console.log("2.3 The hero who got the most **assist** is " + q2part3(heroes).name);
+console.log("2.4 Find the hero who got the worst **kill/death ratio**" + q2part4(heroes).name);
+
+//2.1 Average **networth** of all heroes
+function q2part1(heroes){
+  //initialise total net worth
+  let totalNetWorth = 0;
+
+  //initialise number of heroes
+  let numHeroes = 0;
+
+  //for each hero
+  heroes.forEach(function(hero) {
+    //add the total networth of each hero to the total
+    totalNetWorth+=hero.networth;
+    //add to the count of heroes
+    numHeroes++;
+  });
+
+  //return the average of heroes' networth
+  return totalNetWorth/numHeroes;
+}
+
+//2.2 Average **level** for hero that has 'intelligent' as **primary_attribute**
+function q2part2(heroes){
+  //initialise total level of all intelligent heroes
+  let totalLevelOfIntelligentHeroes = 0;
+
+  //initialise number of heroes
+  let numIntelligentHeroes = 0;
+
+  //for each hero in the heroes array
+  heroes.forEach(function(hero) {
+
+    //if the hero's primary_attribute is intelligent
+    if (hero.primary_attribute==='intelligent'){
+
+      //add this hero's intelligence to the total level of all intelligent heros
+      totalLevelOfIntelligentHeroes+=hero.level;
+
+      //increace the count of number of heroes by 1
+      numIntelligentHeroes++;
+    }
+  });
+
+  //return the avg level of intelligent heroes
+  return totalLevelOfIntelligentHeroes/numIntelligentHeroes;
+}
+
+//2.3 The hero who got the most **assist**
+function q2part3(heroes){
+  //initialise hero with the most assist
+  let heroWithMostAssist = heroes[0];
+
+  //for each hero
+  heroes.forEach(function(hero) {
+
+    //if the current hero's assist is higher than the current heroWithMostAssist
+    if (hero.assist>heroWithMostAssist.assist){
+
+      //make the current hero the new heroWithMostAssist
+      heroWithMostAssist=hero;
+    }
+  });
+
+  //return the hero with the most assist
+  return heroWithMostAssist;
+}
+
+//2.4 Find the hero who got the worst **kill/death ratio**
+function q2part4(heroes){
+  //initialise hero with the worst kill death ratio
+  let heroWithWorstKD = heroes[0];
+
+  //initialise the worst KD ratio
+  let worstKD = 1.0*heroes[0].kill/heroes[0].death;
+
+  //for each hero
+  heroes.forEach(function(hero) {
+
+    //find the current hero's KD
+    let currentKD = 1.0*hero.kill/hero.death;
+
+    //if the current worstKD is higher than the current hero's KD
+    if (worstKD>currentKD){
+
+      //make the current hero the heroWithWorstKD
+      heroWithWorstKD=hero;
+
+      //make the current hero's KD the worst KD
+      worstKD=currentKD;
+    }
+  });
+
+  //return the hero with the worst KD
+  return heroWithWorstKD;
+}
+
 ```
 
 ## Simple Web Application: A joke from Chuck Norris.
@@ -45,19 +202,30 @@ This part of the quest will be a challenging one. You are going to make a simple
 - Using tools & framework which are the same as our tech stack (React, Redux, styled-components, recompose etc.) will be a plus.
 - Any extra feature will be a plus.
 
+```
+React Native was used
+
+
+```
+
 ## Questions
 Q1: What is GraphQL and how it is different from REST API?
 
-A1: <insert your answer here>
+A1: GraphQL is a query-based API. Frontend clients can query a set of data that is dynamic and can be changed to their needs, without having to request a fixed set of data like in REST API. In addition, insightful analytics can be performed on the types of queries received in the GraphQL servers, so less used API routes can be depreciated and more efficient API routes can be created.
 
 
-Q2: Please explain how javascript benefits from cross-platform development
+Q2: Please explain how javascript benefits from cross-platform developments
 
-A2: <insert your answer here>
+A2:
+- An app's client and server side can all be written in JavaScript. This makes it easier to maintain because JavaScript can be used by both frontend and backend web developers.
+- JavaScript has many popular libraries, webtools and frameworks which developers can use, such as React, Node.js, AngularJS and more.
+- React Native helps particularly for cross-platform development because it makes it possible to write code for apps for iOS and Android using only a single programming language.
+
+
 
 Q3: What do you expect to get during an internship at TakeMeTour?
 
-A3: <insert your answer here>
+A3: I have never worked overseas or worked in the tourism industry, and I believe that this internship will give me more global perspective as well as an exposure to a new industry. I hope to get more experience as a data scientist as it is a more backend experience in a mobile/web development environment which is new to me. I also hope to gain greater proficiency in JavaScript.
 
 ## Submitting
 
