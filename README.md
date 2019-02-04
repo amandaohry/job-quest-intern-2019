@@ -205,6 +205,12 @@ This part of the quest will be a challenging one. You are going to make a simple
 ```
 React Native was used
 
+1) cd to project folder (./Q3)
+2) npm install -g expo-cli
+3) npm i --save
+4) (depends on whether you encounter an error) npm install @expo/vector-icons --save-dev
+5) expo start
+6) run app on expo on mobile (ios/android)
 
 ```
 
